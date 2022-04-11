@@ -14,7 +14,5 @@ Quando('submeto o seguinte formulário:') do |table|
     find("#email").set user[:email]
     find("#password").set user[:senha]
 
-    sleep 3
-
     click_button "Cadastrar"
 end
