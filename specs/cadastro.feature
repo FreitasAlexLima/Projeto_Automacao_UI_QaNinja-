@@ -14,7 +14,8 @@ Funcionalidade: Cadastro
             | nome         | email                 | senha    |
             | Alex Freitas | AlexFreitas@gmail.com | 93080203 |
         Então sou redirecionado para o dashboard
-
+        
+    @cadastro1
     Esquema do Cenario: Tentativa de Cadastro
         Dado que acesso a página de cadastro
         Quando submeto o seguinte formulário:

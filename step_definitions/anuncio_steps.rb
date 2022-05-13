@@ -1,39 +1,28 @@
-Dado('que estão logado como {string} e {string}') do |email, password|
 
+Dado('Login com {string} e {string}') do |email, password|
     @email = email
-    visit "/"
-    find("input[placeholder='Seu e-email']").set email
-    find("input[type=password]").set password
-
-    click_button"Entrar"
+    @login_page.open
+    @login_page.with(email, password)
 end
   
 Dado('que acesso o formulário de cadastro de anúncios') do
-    click_button "Criar anúncio"
-    expect(page).to have_css("#equipoForm")
+    @dashpag.go_to_equipolist
 end
 
 Dado('que possuo o seguinte equipamento:') do |table|
-    @anuncio = table.rows_hash
-    MongoDB.new.remove_equipo(@anuncio[:nome],@email) 
-    # metodo para remover anuncio antes de realizar outro cadastros, considerando o id do usuario
+    @equipo = table.rows_hash
+    MongoDB.new.remove_equipo(@equipo[:nome],@email) # metodo para remover anuncio antes de realizar outro cadastros, considerando o id do usuario 
 end
   
 Quando('submeto o cadastro desse item') do
-
-    thumb = Dir.pwd + "/features/support/fixtures/images/" + @anuncio[:thumb]
-
-    find("#thumbnail input[type=file]", visible: false).set thumb
-
-    find("input[placeholder$=equipamento]").set @anuncio[:nome]
-    find("#category").find('option', text: @anuncio[:categoria]).select_option
-    find("input[placeholder^='Valor']").set @anuncio[:preco]
-
-    click_button "Cadastrar"
+    @equipo_page.create(@equipo)
 end
   
 Então('devo ver esse item no meu dashboard') do
-    anuncios = find(".equipo-list")
-    expect(anuncios).to have_content @anuncio[:nome] # metodo HAVE_CONTENT (ESPERO QUE CONTENHA)
-    expect(anuncios).to have_content "R$#{@anuncio[:preco]}/dia"
+    expect(@dashpag.equipo_list).to have_content @equipo[:nome] # metodo HAVE_CONTENT (ESPERO QUE CONTENHA)
+    expect(@dashpag.equipo_list).to have_content "R$#{@equipo[:preco]}/dia"
+end
+
+Então('a alerta exibido deve conter: {string}') do |expect_alert|
+    expect(@alert.dark).to have_content expect_alert
 end
