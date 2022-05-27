@@ -1,0 +1,3 @@
+---
+url: http://rocklov-web:3000 #hipotetica url para acessar a aplicação  em outro ambeinte (homologação)
+mongo: mongodb://rocklov-db:27017/rocklov

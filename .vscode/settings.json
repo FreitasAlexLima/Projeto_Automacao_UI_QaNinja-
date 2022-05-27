@@ -1,0 +1,7 @@
+{
+    "cucumberautocomplete.onTypeFormat": true,
+    "cucumberautocomplete.skipDocStringsFormat": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.stepsInvariants": true,
+    "cucumberautocomplete.strictGherkinValidation": true
+}
