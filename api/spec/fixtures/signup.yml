@@ -1,0 +1,22 @@
+
+- title: Email em Branco
+  payload:
+    name: "Alan"
+    email: ''
+    password: alex123
+  code: 412
+  error: required email
+- title: Senha em branco
+  payload:
+    name: "Alan"
+    email: alexfreitas468@gmail.com
+    password: ''
+  code: 412
+  error: required password
+- title: Nome em branco
+  payload:
+    name: ''
+    email: alexfreitas46@gmail.com
+    password: alex132
+  code: 412
+  error: required name

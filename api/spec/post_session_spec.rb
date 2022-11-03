@@ -1,4 +1,3 @@
-require "routes/sessions"
 
 describe "POST /sessions" do
    
@@ -10,7 +9,7 @@ describe "POST /sessions" do
         # it falhe o testes é abortado e a validação seguinte não é executado.
         
         before(:all) do 
-           payload = { email: "alexfreitas468@gmail.com" , password: "alex123"}
+           payload = { email: "alexfreitas468@gmail.com" , password: "pwd123"}
            @result = Sessions.new.login(payload)
            # Como a responsabilidade de realizar o login vai tranferida para o 'page' sessions, no script do testes é necessario.. 
            #.. apenas instaciar a referida classe criada e acessar o metodo de login da mesma.
@@ -26,45 +25,9 @@ describe "POST /sessions" do
 
         # criando um it para cada validação os testes são executado independente se o anterior passou ou não.
     end
-    exemples = [
-        {
-            title:"Email invalido",
-            payload:{ email: "alexfreitas46@gmail.com" , password: "alex123"},
-            code:401,
-            error:"Unauthorized"
-        },
-        {
-            title:"Senha em branco",
-            payload:{ email: "alexfreitas468@gmail.com" , password: ""},
-            code:412,
-            error:"required password"
-        },
-        {
-            title:"Sem campo senha",
-            payload:{ email: "alexfreitas468@gmail.com"},
-            code:412,
-            error:"required password"
-        },
-        {
-            title:"Email em branco",
-            payload:{ email: "", password: "alex123"},
-            code:412,
-            error:"required email"
-        },
-        {
-            title:"Sem campo email",
-            payload:{password: "alex123"},
-            code:412,
-            error:"required email"
-        },
-        {
-            title:"Senha invalida",
-            payload:{ email: "alexfreitas46@gmail.com" , password: "alex132"},
-            code:401,
-            error:"Unauthorized"
-        }
 
-    ]
+    exemples = Helpers::get_fixures("login")
+
     exemples.each do |e| 
         context "#{e[:title]}" do
 
@@ -82,3 +45,43 @@ describe "POST /sessions" do
         end    
     end
 end
+
+# exemples = [
+    #     {
+    #         title:"Email invalido",
+    #         payload:{ email: "alexfreitas46@gmail.com" , password: "alex123"},
+    #         code:401,
+    #         error:"Unauthorized"
+    #     },
+    #     {
+    #         title:"Senha em branco",
+    #         payload:{ email: "alexfreitas468@gmail.com" , password: ""},
+    #         code:412,
+    #         error:"required password"
+    #     },
+    #     {
+    #         title:"Sem campo senha",
+    #         payload:{ email: "alexfreitas468@gmail.com"},
+    #         code:412,
+    #         error:"required password"
+    #     },
+    #     {
+    #         title:"Email em branco",
+    #         payload:{ email: "", password: "alex123"},
+    #         code:412,
+    #         error:"required email"
+    #     },
+    #     {
+    #         title:"Sem campo email",
+    #         payload:{password: "alex123"},
+    #         code:412,
+    #         error:"required email"
+    #     },
+    #     {
+    #         title:"Senha invalida",
+    #         payload:{ email: "alexfreitas46@gmail.com" , password: "alex132"},
+    #         code:401,
+    #         error:"Unauthorized"
+    #     }
+
+    # ]

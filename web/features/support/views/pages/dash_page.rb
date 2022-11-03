@@ -7,6 +7,7 @@ class DashPage
 
   def go_to_equipolist
     click_button "Criar anúncio"
+    
   end
 
   def equipo_list
