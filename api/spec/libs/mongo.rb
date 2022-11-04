@@ -24,9 +24,9 @@ class MongoDB
 
   # metodo para buscar o id do usuario
 
-  def remove_equipo(name, email)
-    user_id = get_users(email)
-    @equipos.delete_many({ name: name, user: user_id })
+  def remove_equipo(name, user_id)
+    object_id = BSON::ObjectId.from_string(user_id) # converte a infromação do tipo string para objectID a qual o mongo trabalha bem.
+    @equipos.delete_many({ name: name, user: object_id })
   end
 
   # metodo para remover o anuncio repitido antes de realizar um novo cadatsro ( teste)
