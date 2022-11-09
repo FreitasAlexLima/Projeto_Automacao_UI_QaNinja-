@@ -16,7 +16,7 @@ describe "POST /equipos" do
                 category: "Cordas",
                 price: 299,
             }
-            MongoDB.new.remove_equipo(payload[:name], @user_id) # instacia a classe do mongoDB e utiliza o metodo remove com name e ID de argumentos para remover  cadastros anteriores e não haver conflitos.
+            MongoDB.new.remove_equipo(payload[:name], @user_id) # instancia a classe do mongoDB e utiliza o metodo remove com name e ID de argumentos para remover  cadastros anteriores e não haver conflitos.
 
             @result = Equipos.new.create(payload, @user_id) # armazena dentro da variavel @result a instacia da classe Equipos 
         end

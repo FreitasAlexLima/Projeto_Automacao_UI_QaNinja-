@@ -31,4 +31,9 @@ class MongoDB
 
   # metodo para remover o anuncio repitido antes de realizar um novo cadatsro ( teste)
 
+  def get_mongo_id
+    return BSON::ObjectId.new
+  end
+
+  # metodo para gerar um objeto aleatorio no formato ID do mongoDB
 end
