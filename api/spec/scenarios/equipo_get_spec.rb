@@ -38,6 +38,10 @@ describe 'GEt /equipos/{equipo_id}' do
         it "deve retornar 200" do
             expect(@result.code).to eql 200
         end
+
+        it "deve retorno o nome" do
+            expect(@result.parsed_response).to include("name" => @payload[:name])
+        end
     end
 
     context "Equipo nao existe" do
