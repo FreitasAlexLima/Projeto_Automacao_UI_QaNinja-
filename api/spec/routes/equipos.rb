@@ -20,6 +20,15 @@ class Equipos < BaseApi
         )
     end
 
+    def list(user_id) # metodo para buscar por id, utilizando os argumento  e 'User_id'
+        return self.class.get( # retorno do metodo é um GET
+            "/equipos", # rota da api
+            headers: {
+                "user_id": user_id, # o headers  realizar aautorização para que a consulta seja realizado.
+            },
+        )
+    end
+
     def remove_by_id(equipo_id, user_id) # metodo para buscar por id, utilizando os argumentos "equipo_id" e 'User_id'
         return self.class.delete( # retorno do metodo é um delete
             "/equipos/#{equipo_id}", # rota da api com interpolação para completar o endereço correto do equipamento ( que possue o id no final)
