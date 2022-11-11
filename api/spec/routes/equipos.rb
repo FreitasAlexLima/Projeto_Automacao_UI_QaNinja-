@@ -19,6 +19,15 @@ class Equipos < BaseApi
             },
         )
     end
+    def booking(equipo_id, user_locator_id)
+        return self.class.post(
+            "/equipos/#{equipo_id}/bookings", 
+            body: {date: Time.now.strftime("%d-%m-%Y")},
+            headers: {
+                "user_id": user_locator_id,
+            },
+        )
+    end
 
     def list(user_id) # metodo para buscar por id, utilizando os argumento  e 'User_id'
         return self.class.get( # retorno do metodo é um GET
