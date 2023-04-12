@@ -1,0 +1,43 @@
+require 'digest/md5' # essa lib faz a conversão do string para md5 (criptografia)
+require_relative "features/support/libs/mongo"
+
+def to_md5(pass)
+  return Digest::MD5.hexdigest(pass)  
+end
+
+task :test do
+    p 'executando uma tarefa de teste'
+end
+
+task :local_seeds do
+
+    CONFIG = YAML.load_file(File.join(Dir.pwd, "features/support/Config/local.yml"))
+
+    users =[  
+        {name: "Alex Lima", email: "alexfreitas468@gmail.com" , password: to_md5("alex123")},
+        {name: "Alex Freitas", email: "alex1354@gmail.com" , password: to_md5("93080206")},
+        {name: "Alex Fragoso", email: "Afragoso@hotmail.com" , password: to_md5("93080206")},
+        {name: "Joao anunciante", email: "joaoanunciante@bol.com" , password: to_md5("pwd123")},
+        {name: "Maria locataria", email: "marialocataria@bol.com" , password: to_md5("pwd123")},
+    ] 
+    MongoDB.new.drop_danger 
+    MongoDB.new.insert_users(users) 
+    sh "cucumber"
+end
+
+# a task a segyuir é referente ao ambiente de homologação, dadoq ue a variavel config é estática agr.
+
+task :hmg_seeds do
+
+    CONFIG = YAML.load_file(File.join(Dir.pwd, "features/support/Config/hmg.yml"))
+
+    # variavel de ambiente CONFIG estav localizada no arquivo ENV, mas como o rake não compartilha desse arquivo que é do cucumber, temos que incializar-la dentro do aqriovo rake tbm.
+
+    users =[  # criamos uma array contendo toda a carga de usuarios que será utilizado para os testes
+        {name: "Alex Lima", email: "alexfreitas468@gmail.com" , password: to_md5("alex123")},
+        {name: "Alex Freitas", email: "alex1354@gmail.com" , password: to_md5("93080206")},
+    ]
+    
+    MongoDB.new.drop_danger # intanciamos o metodo de exclusão dos usuarios ( caso tenha alguma no banco).
+    MongoDB.new.insert_users(users) # e realizamos a intancia do metodo de inclusão dos usuarios 'sementes' para que os testes do rspec sejam realizados.
+end

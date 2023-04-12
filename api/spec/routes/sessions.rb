@@ -10,7 +10,6 @@ class Sessions < BaseApi
             },
         ) 
     end
-    9
 end 
 
 # DRY - Don't reapeat yourself ( não se repita) padrão que utiliza o encapsulamento para evitar retrabalhos
