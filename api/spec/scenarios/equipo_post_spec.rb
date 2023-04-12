@@ -11,7 +11,7 @@ describe "POST /equipos" do
         before(:all) do
            # thumbnail = File.open(File.join(Dir.pwd + "/spec/fixtures/images", "kramer.jpg"), "rb") # argumento 'rb'  para informar que a leitura é apenas de forma não binaria
             payload = {
-                thumbnail: Helpers::get_thumbnail("kramer.jpg"), # funcção para buscar imagem foi emcapsulada no aquivo de helpers,
+                thumbnail: Helpers::get_thumbnail("kramer.jpg"), # função para buscar imagem foi emcapsulada no aquivo de helpers,
                 name: "kramer",
                 category: "Cordas",
                 price: 299,
